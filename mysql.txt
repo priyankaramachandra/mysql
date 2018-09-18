@@ -1,0 +1,76 @@
+create database priyanka;
+use priyanka;
+
+create table BoneStage(id int(4),name varchar(10),stages varchar(10),primary key(id));
+
+describe BoneStage;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int(4)      | NO   | PRI | NULL    |       |
+| name   | varchar(10) | YES  |     | NULL    |       |
+| stages | varchar(10) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+create table Bone(id int(4),bone int(5),stages varchar(10),primary key(id),foreign key(bone) references BoneStage(id));
+
+mysql> describe Bone;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int(4)      | NO   | PRI | NULL    |       |
+| bone   | int(5)      | YES  | MUL | NULL    |       |
+| stages | varchar(10) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+create table consultations(idconsultations int(5),personalno int(10),weight int(5),height int(5),diagnostic varchar(10),selected_bones varchar(10),realscore varchar(10),maturity_score varchar(10),bone_age int(10),physician varchar(10),foreign key(personalno) references patients(personalno),foreign key(physician) references physicians(name));
+
+mysql> describe consultations;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| idconsultations | int(5)      | YES  |     | NULL    |       |
+| personalno      | int(10)     | YES  | MUL | NULL    |       |
+| weight          | int(5)      | YES  |     | NULL    |       |
+| height          | int(5)      | YES  |     | NULL    |       |
+| diagnostic      | varchar(10) | YES  |     | NULL    |       |
+| selected_bones  | varchar(10) | YES  |     | NULL    |       |
+| realscore       | varchar(10) | YES  |     | NULL    |       |
+| maturity_score  | varchar(10) | YES  |     | NULL    |       |
+| bone_age        | int(10)     | YES  |     | NULL    |       |
+| physician       | varchar(10) | YES  | MUL | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+10 rows in set (0.00 sec)
+
+
+create table patients(idpatient int(5),personalno int(10),second_name varchar(6),first_name varchar(10),sex varchar(6),dob int(10),pob varchar(10),por varchar(10),physician varchar(10),foreign key(physician) references physicians(name),primary key(personalno));
+
+mysql> describe patients;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| idpatient   | int(5)      | YES  |     | NULL    |       |
+| personalno  | int(10)     | NO   | PRI | NULL    |       |
+| second_name | varchar(6)  | YES  |     | NULL    |       |
+| first_name  | varchar(10) | YES  |     | NULL    |       |
+| sex         | varchar(6)  | YES  |     | NULL    |       |
+| dob         | int(10)     | YES  |     | NULL    |       |
+| pob         | varchar(10) | YES  |     | NULL    |       |
+| por         | varchar(10) | YES  |     | NULL    |       |
+| physician   | varchar(10) | YES  | MUL | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+
+create table physicians(id int(5),name varchar(10),password varchar(5),primary key(name));
+mysql> describe physicians;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(5)      | YES  |     | NULL    |       |
+| name     | varchar(10) | NO   | PRI | NULL    |       |
+| password | varchar(5)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
